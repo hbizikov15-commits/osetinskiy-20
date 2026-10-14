@@ -268,6 +268,101 @@
     })
   }
 
+  // Осетинские фразы, спрятанные в строке курса («Дæ бон хорз! / Уæ бон хорз! — добрый день»).
+  // Разбор делает та же функция, что и в инструменте озвучки: ozvuchka\sobrat-slova.cjs.
+  function frazySoZvukom(tekst) {
+    if (!zvuki) return []
+    return L.frazyIzStroki(tekst).filter((f) => faylZvuka(f))
+  }
+
+  // Ряд кнопок «послушать» под строкой курса.
+  function ryadFraza(tekst) {
+    const frazy = frazySoZvukom(tekst)
+    if (!frazy.length) return null
+    return h('div', { class: 'row wrap' }, frazy.map((fraza) =>
+      h('button', {
+        class: 'btn small',
+        text: `🔊 ${fraza}`,
+        onclick: (e) => {
+          e.stopPropagation()
+          igrat(fraza)
+        },
+      }),
+    ))
+  }
+
+  // Весь озвученный материал блока: фразы из ядра (алфавит добавляется отдельно).
+  function materialBloka(block) {
+    const frazy = []
+    const uzhe = new Set()
+    for (const sekciya of block.core || []) {
+      for (const punkt of sekciya.items || []) {
+        if (typeof punkt !== 'string') continue
+        for (const fraza of L.frazyIzStroki(punkt)) {
+          const klyuch = L.klyuchZvuka(fraza)
+          if (!faylZvuka(fraza) || uzhe.has(klyuch)) continue
+          uzhe.add(klyuch)
+          frazy.push(fraza)
+        }
+      }
+    }
+    return frazy
+  }
+
+  // Блок «слушать и повторять»: кнопки всех фраз по порядку и прослушивание подряд.
+  function blokSlushaniya(block) {
+    const frazy = materialBloka(block)
+    const bukvy = (block.n === 1 ? DATA.alphabet : []).filter((b) => faylZvuka(b))
+    const bezZvuka = (block.n === 1 ? DATA.alphabet : []).filter((b) => !faylZvuka(b))
+
+    if (!zvuki) {
+      return h('div', { class: 'cardbox' }, [
+        h('h2', { text: 'Слушать и повторять' }),
+        h('p', { class: 'muted small', text: zvukiNet
+          ? 'Озвучка не загрузилась — проверьте интернет и обновите страницу.'
+          : 'Озвучка загружается…' }),
+      ])
+    }
+
+    return h('div', { class: 'cardbox' }, [
+      h('h2', { text: 'Слушать и повторять' }),
+      h('p', { class: 'muted small', text: 'Нажмите слово — услышите произношение. Слушайте и повторяйте вслух: это и есть шаг «аудирование».' }),
+
+      bukvy.length
+        ? h('div', {}, [
+            h('h3', { text: 'Алфавит, 43 буквы' }),
+            h('div', { class: 'row wrap' }, bukvy.map((b) =>
+              h('button', { class: 'chip', text: b, onclick: (e) => { e.stopPropagation(); igrat(b) } }),
+            )),
+            h('button', {
+              class: 'btn ghost wide',
+              text: '▶️ Прослушать весь алфавит подряд',
+              onclick: (e) => igratPodryad(bukvy, e.currentTarget),
+            }),
+            bezZvuka.length
+              ? h('p', { class: 'muted small', text: `Без озвучки (этих букв нет в модели): ${bezZvuka.join(', ')}` })
+              : null,
+          ])
+        : null,
+
+      frazy.length
+        ? h('div', {}, [
+            h('h3', { text: 'Фразы блока' }),
+            h('div', { class: 'row wrap' }, frazy.map((f) =>
+              h('button', { class: 'btn small', text: `🔊 ${f}`, onclick: (e) => { e.stopPropagation(); igrat(f) } }),
+            )),
+            h('button', {
+              class: 'btn ghost wide',
+              text: `▶️ Прослушать все фразы блока (${frazy.length})`,
+              onclick: (e) => igratPodryad(frazy, e.currentTarget),
+            }),
+          ])
+        : null,
+
+      h('p', { class: 'muted small', text: 'Живые записи носителей (диалоги, новости) — по ссылкам в «Источниках блока»: их синтезом не заменить.' }),
+    ])
+  }
+
   function toast(text, kind) {
     const box = $('#toast')
     box.textContent = text
@@ -551,7 +646,9 @@
     const core = block.core.map((section) =>
       h('details', { class: 'acc' }, [
         h('summary', { text: section.h }),
-        h('ul', { class: 'list-plain' }, section.items.map((item) => h('li', { text: item }))),
+        h('ul', { class: 'list-plain' }, section.items.map((item) =>
+          h('li', {}, [h('span', { text: item }), ryadFraza(item)]),
+        )),
       ]),
     )
 
@@ -613,6 +710,8 @@
 
       h('h2', { text: 'Ядро блока: 20%, которое даёт 80%' }),
       ...core,
+
+      blokSlushaniya(block),
 
       block.proverit ? h('div', { class: 'warn' }, [h('b', { text: 'Проверить у носителя. ' }), block.proverit]) : null,
 
@@ -781,8 +880,7 @@
       h('div', { class: 'row' }, [
         h('button', {
           class: 'btn ghost grow',
-          text: 'Закончить и записать время',
-          onclick: () => confirmBox('Закончить занятие и записать пройденное время в прогресс?', () => finishTimer(false)),
+          text: 'Закончить и записать время',          onclick: () => confirmBox('Закончить занятие и записать пройденное время в прогресс?', () => finishTimer(false)),
         }),
         h('button', {
           class: 'btn ghost',
@@ -794,6 +892,7 @@
           }),
         }),
       ]),
+      blokSlushaniya(block),
       list,
     ])
   }
@@ -984,9 +1083,30 @@
       section('Шпаргалка ядра', DATA.cheat.map((group) =>
         h('div', { class: 'cardbox' }, [
           h('div', { class: 'title', text: group.h }),
-          h('ul', { class: 'list-plain' }, group.items.map((i) => h('li', { text: i }))),
+          h('ul', { class: 'list-plain' }, group.items.map((i) =>
+            h('li', {}, [h('span', { text: i }), ryadFraza(i)]),
+          )),
         ]),
       )),
+
+      section('Алфавит со звуком', h('div', {}, [
+        h('p', { class: 'muted small', text: 'Нажмите букву — услышите, как она звучит.' }),
+        zvuki
+          ? h('div', { class: 'row wrap' }, DATA.alphabet.map((b) =>
+              faylZvuka(b)
+                ? h('button', { class: 'chip', text: b, onclick: (e) => { e.stopPropagation(); igrat(b) } })
+                : h('span', { class: 'chip plain', text: `${b} — нет озвучки`, title: 'Этой буквы нет в словаре модели озвучки' }),
+            ))
+          : h('p', { class: 'muted small', text: zvukiNet ? 'Озвучка не загрузилась.' : 'Озвучка загружается…' }),
+        zvuki
+          ? h('button', {
+              class: 'btn ghost wide',
+              text: '▶️ Прослушать весь алфавит подряд',
+              onclick: (e) => igratPodryad(DATA.alphabet.filter((b) => faylZvuka(b)), e.currentTarget),
+            })
+          : null,
+        h('p', { class: 'muted small', text: 'Буквы Ё, Ш, Щ, Ь, Я пришли из русского алфавита для заимствованных слов; модель озвучки их не произносит.' }),
+      ])),
 
       section('Разбор в конце блока', h('ul', { class: 'list-plain' }, DATA.review.map((r) => h('li', { text: r })))),
 
