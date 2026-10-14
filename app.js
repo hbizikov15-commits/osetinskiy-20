@@ -373,6 +373,20 @@
         h('b', { text: 'Правило дня: ' }),
         h('span', { text: 'каждый блок заканчивается речью вслух. Не записали себя на диктофон — блок не закрыт.' }),
       ]),
+      // Учебный материал (слова и правила) лежит в отдельных разделах. Кнопки здесь —
+      // чтобы до него можно было дойти прямо с первого экрана, а не только через нижнюю панель.
+      h('div', { class: 'row' }, [
+        h('button', {
+          class: 'btn grow',
+          text: `🃏 Карточки слов (${DATA.cards.length})`,
+          onclick: () => (location.hash = '#/cards'),
+        }),
+        h('button', {
+          class: 'btn grow',
+          text: '📋 Шпаргалка и правила',
+          onclick: () => (location.hash = '#/sheet'),
+        }),
+      ]),
       h('div', { class: 'list' }, DATA.blocks.map((block) => {
         const percent = blockPercent(block.n)
         const done = bstate(block.n).done
@@ -979,6 +993,23 @@
       const p = tg.themeParams || {}
       const set = (name, value) => {
         if (value) document.documentElement.style.setProperty(name, value)
+      }
+      // Telegram отдаёт не все цвета. Если тема светлая, сначала ставим свою светлую
+      // палитру целиком: иначе тёмные части (кнопки, нижняя панель, карточка слова)
+      // остаются тёмными и текст на них не читается.
+      if ((tg.colorScheme || '').toLowerCase() === 'light') {
+        set('--bg', '#f4f6f9')
+        set('--card', '#ffffff')
+        set('--card2', '#e8ecf3')
+        set('--text', '#151a23')
+        set('--muted', '#5c6675')
+        set('--line', '#d6dbe4')
+        set('--ok-text', '#0f7a44')
+        set('--danger-text', '#b3261e')
+        set('--word2', '#3a4453')
+        set('--nav-bg', 'rgba(255, 255, 255, .96)')
+      } else {
+        set('--nav-bg', 'rgba(14, 17, 22, .96)')
       }
       set('--bg', p.bg_color)
       set('--card', p.secondary_bg_color)
