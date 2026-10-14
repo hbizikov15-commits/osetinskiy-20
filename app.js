@@ -140,7 +140,7 @@
   // моделью Meta MMS для осетинского языка (CC-BY-NC 4.0).
   let zvuki = null // карта «текст слова → файл»
   let zvukiNet = false // озвучки нет (не загрузилась) — кнопки не показываем
-  let igraet = null // текущий проигрываемый звук
+  let pleer = null // один проигрыватель на всё приложение (см. poluchitPleer)
   let podryad = null // состояние прослушивания подряд: { fayly, nomer, stop }
 
   // Чистка текста и ключ для поиска озвучки лежат в logic.js (L.klyuchZvuka) —
@@ -172,11 +172,45 @@
 
   function ostanovitZvuk() {
     try {
-      if (igraet) igraet.pause()
+      if (pleer) pleer.pause()
     } catch {}
-    igraet = null
     if (podryad) podryad.stop = true
     podryad = null
+  }
+
+  // Один и тот же проигрыватель на всё приложение: на iPhone Safari разрешает
+  // продолжать звук только тому элементу, который «разбужен» нажатием. Если каждый
+  // раз создавать новый Audio, режим «прослушать подряд» обрывается после первого слова.
+  function poluchitPleer() {
+    if (!pleer) {
+      try {
+        pleer = new Audio()
+        pleer.preload = 'auto'
+      } catch {
+        return null
+      }
+    }
+    return pleer
+  }
+
+  function vklyuchit(fayl, naOkonchanie) {
+    const igrushka = poluchitPleer()
+    if (!igrushka) {
+      toast('В этом браузере звук недоступен', 'warn')
+      return false
+    }
+    try {
+      igrushka.onended = naOkonchanie || null
+      igrushka.src = fayl
+      const start = igrushka.play()
+      if (start && start.catch) {
+        start.catch(() => toast('Звук не включился: проверьте громкость телефона и разрешение на звук', 'warn'))
+      }
+      return true
+    } catch {
+      toast('В этом браузере звук недоступен', 'warn')
+      return false
+    }
   }
 
   function igrat(tekst) {
@@ -185,16 +219,8 @@
       toast('Для этого слова озвучки нет', 'warn')
       return
     }
-    try {
-      ostanovitZvuk()
-      igraet = new Audio(fayl)
-      const start = igraet.play()
-      if (start && start.catch) {
-        start.catch(() => toast('Звук не включился: проверьте громкость телефона и разрешение на звук', 'warn'))
-      }
-    } catch {
-      toast('В этом браузере звук недоступен', 'warn')
-    }
+    ostanovitZvuk()
+    vklyuchit(fayl)
   }
 
   // Проиграть список слов подряд — упражнение «слушать и повторять вслух».
@@ -221,14 +247,7 @@
       }
       sostoyanie.nomer += 1
       if (knopka) knopka.textContent = `⏸ Слушаем ${sostoyanie.nomer} из ${faily.length} — нажмите, чтобы остановить`
-      try {
-        igraet = new Audio(faily[sostoyanie.nomer - 1])
-        igraet.onended = sleduyushchee
-        const start = igraet.play()
-        if (start && start.catch) start.catch(() => { sostoyanie.stop = true })
-      } catch {
-        sostoyanie.stop = true
-      }
+      if (!vklyuchit(faily[sostoyanie.nomer - 1], sleduyushchee)) sostoyanie.stop = true
     }
     sleduyushchee()
   }
