@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Осетинский за 20 часов</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e1116">
+<meta name="description" content="Мини-приложение: 10 блоков по 2 часа, таймер занятия, карточки слов и прогресс.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ирон 20ч">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='50' font-size='48'>📚</text></svg>">
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #171b22;
+    --card2: #1e232c;
+    --text: #e8eaf0;
+    --muted: #98a2b3;
+    --accent: #4c8dff;
+    --accent-text: #ffffff;
+    --line: #262c37;
+    --ok: #2fbf71;
+    --warn: #f0a33a;
+    --danger: #e5484d;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overscroll-behavior-y: contain;
+  }
+  h1 { font-size: 21px; line-height: 1.25; margin: 10px 0 8px; }
+  h2 { font-size: 17px; margin: 22px 0 8px; }
+  h3 { font-size: 15px; margin: 16px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  p { margin: 8px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  main {
+    flex: 1;
+    padding: 8px 14px calc(92px + env(safe-area-inset-bottom));
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
+  .grow { flex: 1; min-width: 0; }
+
+  .hero { padding: 12px 0 4px; }
+  .hero h1 { font-size: 24px; margin-bottom: 2px; }
+  .lead { font-size: 15px; }
+  .note {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .warn {
+    background: rgba(240, 163, 58, .1);
+    border: 1px solid rgba(240, 163, 58, .35);
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .stats { display: flex; gap: 8px; margin: 12px 0; }
+  .stat {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .stat b { display: block; font-size: 20px; }
+  .stat span { font-size: 12px; color: var(--muted); }
+
+  .list { display: flex; flex-direction: column; gap: 8px; }
+  .list-plain { margin: 6px 0; padding-left: 20px; }
+  .list-plain li { margin: 5px 0; }
+  .links li { word-break: break-word; }
+
+  .block-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    color: var(--text);
+    font: inherit;
+  }
+  .block-row.static { cursor: default; }
+  .block-row .num {
+    width: 34px; height: 34px;
+    flex: 0 0 34px;
+    border-radius: 50%;
+    background: var(--card2);
+    display: grid; place-items: center;
+    font-weight: 600;
+  }
+  .block-row .num.done { background: var(--ok); color: #06130b; }
+  .block-row .title { font-weight: 600; font-size: 15px; }
+  .block-row .title.small { font-weight: 500; font-size: 14px; }
+  .block-row .percent { font-size: 13px; color: var(--muted); min-width: 38px; text-align: right; }
+
+  .bar { height: 6px; background: var(--card2); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .bar i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .3s; }
+  .big-bar { height: 10px; }
+
+  .btn {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: var(--card2);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btn:active { transform: scale(.99); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+  .btn.ghost { background: transparent; }
+  .btn.danger { background: rgba(229, 72, 77, .14); border-color: rgba(229, 72, 77, .45); color: #ff9a9d; }
+  .btn.wide { display: block; width: 100%; margin: 10px 0; }
+  .btn.small { padding: 8px 10px; font-size: 13px; }
+
+  .row { display: flex; gap: 8px; align-items: center; margin: 8px 0; flex-wrap: nowrap; }
+  .row.wrap { flex-wrap: wrap; }
+  .row.between { justify-content: space-between; }
+
+  .badge {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .badge.ok { color: #7ff0b0; border-color: rgba(47, 191, 113, .4); }
+
+  details.acc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 8px 0;
+  }
+  details.acc summary { cursor: pointer; font-weight: 600; font-size: 15px; }
+  details.acc ul { margin: 8px 0 2px; }
+
+  .steps { display: flex; flex-direction: column; gap: 8px; margin: 8px 0; }
+  .step {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  .step .time { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--muted); flex: 0 0 84px; }
+  .step .step-name { font-weight: 600; font-size: 14px; }
+  .step.on { border-color: var(--accent); background: rgba(76, 141, 255, .12); }
+  .step.done { opacity: .55; }
+  .pill { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 3px 8px; }
+  .pill.on { color: var(--text); border-color: var(--accent); }
+
+  .check {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 6px 0;
+    font-size: 14px;
+  }
+  .check input { margin-top: 2px; width: 20px; height: 20px; accent-color: var(--accent); flex: 0 0 20px; }
+  .check.on { border-color: rgba(47, 191, 113, .5); }
+  .check.on span { color: var(--muted); }
+
+  .area {
+    width: 100%;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 15px;
+    margin: 6px 0;
+    resize: vertical;
+  }
+  .field { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+  .field input, .field select {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px;
+    font: inherit;
+    font-size: 16px;
+  }
+
+  .chips { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0 8px; }
+  .chip {
+    flex: 0 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 99px;
+    padding: 7px 12px;
+    font: inherit;
+    font-size: 14px;
+  }
+  .chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+  .chip.plain { color: var(--muted); font-size: 13px; }
+
+  .cardbox {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    margin: 8px 0;
+  }
+  .cardbox.center { text-align: center; }
+  .big { font-size: 44px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.02em; margin: 4px 0; }
+
+  .flash {
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    min-height: 46vh;
+    padding: 18px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+  .flash .deck { font-size: 12px; }
+  .flash .word { font-size: 30px; font-weight: 700; line-height: 1.2; word-break: break-word; }
+  .flash .word2 { font-size: 20px; color: #d5dbe8; }
+  .flash .answer { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+
+  nav.tabs {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    display: flex;
+    background: rgba(14, 17, 22, .96);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    z-index: 20;
+  }
+  nav.tabs .tab {
+    flex: 1;
+    background: none;
+    border: 0;
+    color: var(--muted);
+    font: inherit;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 0;
+    cursor: pointer;
+  }
+  nav.tabs .tab .ic { font-size: 19px; line-height: 1; }
+  nav.tabs .tab.on { color: var(--accent); }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    transform: translate(-50%, 20px);
+    background: var(--card2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    max-width: 90vw;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s;
+    z-index: 40;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .toast.ok { border-color: rgba(47, 191, 113, .5); }
+  .toast.warn { border-color: rgba(240, 163, 58, .5); }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    z-index: 50;
+  }
+  .modal-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+    max-width: 420px;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+  <main id="view"></main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <nav id="tabs" class="tabs" aria-label="Разделы"></nav>
+  <script src="logic.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
