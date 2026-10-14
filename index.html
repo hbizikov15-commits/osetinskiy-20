@@ -25,6 +25,10 @@
     --ok: #2fbf71;
     --warn: #f0a33a;
     --danger: #e5484d;
+    --ok-text: #7ff0b0;
+    --danger-text: #ff9a9d;
+    --word2: #d5dbe8;
+    --nav-bg: rgba(14, 17, 22, .96);
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; }
@@ -135,7 +139,7 @@
   .btn:active { transform: scale(.99); }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
   .btn.ghost { background: transparent; }
-  .btn.danger { background: rgba(229, 72, 77, .14); border-color: rgba(229, 72, 77, .45); color: #ff9a9d; }
+  .btn.danger { background: rgba(229, 72, 77, .14); border-color: rgba(229, 72, 77, .45); color: var(--danger-text); }
   .btn.wide { display: block; width: 100%; margin: 10px 0; }
   .btn.small { padding: 8px 10px; font-size: 13px; }
 
@@ -152,7 +156,7 @@
     font-size: 12px;
     color: var(--muted);
   }
-  .badge.ok { color: #7ff0b0; border-color: rgba(47, 191, 113, .4); }
+  .badge.ok { color: var(--ok-text); border-color: rgba(47, 191, 113, .4); }
 
   details.acc {
     background: var(--card);
@@ -259,14 +263,14 @@
   }
   .flash .deck { font-size: 12px; }
   .flash .word { font-size: 30px; font-weight: 700; line-height: 1.2; word-break: break-word; }
-  .flash .word2 { font-size: 20px; color: #d5dbe8; }
+  .flash .word2 { font-size: 20px; color: var(--word2); }
   .flash .answer { display: flex; flex-direction: column; gap: 8px; align-items: center; }
 
   nav.tabs {
     position: fixed;
     left: 0; right: 0; bottom: 0;
     display: flex;
-    background: rgba(14, 17, 22, .96);
+    background: var(--nav-bg);
     backdrop-filter: blur(10px);
     border-top: 1px solid var(--line);
     padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
@@ -278,7 +282,7 @@
     border: 0;
     color: var(--muted);
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -286,7 +290,7 @@
     padding: 4px 0;
     cursor: pointer;
   }
-  nav.tabs .tab .ic { font-size: 19px; line-height: 1; }
+  nav.tabs .tab .ic { font-size: 20px; line-height: 1; }
   nav.tabs .tab.on { color: var(--accent); }
 
   .toast {
