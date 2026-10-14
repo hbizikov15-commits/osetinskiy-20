@@ -113,8 +113,7 @@
   }
 
   let audioCtx = null
-  function beep(times) {
-    try {
+  function beep(times) {    try {
       const Ctx = window.AudioContext || window.webkitAudioContext
       if (!Ctx) return
       audioCtx = audioCtx || new Ctx()
@@ -133,6 +132,121 @@
         osc.stop(at + 0.25)
       }
     } catch {}
+  }
+
+  // ------------------------------------------------------------------ озвучка слов
+  // Рядом с приложением лежит папка audio: mp3 на каждое слово курса и список
+  // audio/spisok.json вида [{ tekst, fayl }]. Озвучка синтезирована локально
+  // моделью Meta MMS для осетинского языка (CC-BY-NC 4.0).
+  let zvuki = null // карта «текст слова → файл»
+  let zvukiNet = false // озвучки нет (не загрузилась) — кнопки не показываем
+  let igraet = null // текущий проигрываемый звук
+  let podryad = null // состояние прослушивания подряд: { fayly, nomer, stop }
+
+  // Чистка текста и ключ для поиска озвучки лежат в logic.js (L.klyuchZvuka) —
+  // одна и та же функция используется приложением, инструментом озвучки и тестами.
+  async function zagruzitZvuki() {
+    if (zvuki || zvukiNet) return zvuki
+    try {
+      const otvet = await fetch('audio/spisok.json', { cache: 'no-store' })
+      if (!otvet.ok) throw new Error(String(otvet.status))
+      const dannye = await otvet.json()
+      const karta = new Map()
+      for (const f of dannye.faily || []) {
+        const klyuch = L.klyuchZvuka(f && f.tekst)
+        if (klyuch && f.fayl) karta.set(klyuch, `audio/${f.fayl}`)
+      }
+      if (!karta.size) throw new Error('пусто')
+      zvuki = karta
+      render() // кнопки появляются, как только список доехал
+    } catch {
+      zvukiNet = true
+    }
+    return zvuki
+  }
+
+  function faylZvuka(tekst) {
+    if (!zvuki) return null
+    return zvuki.get(L.klyuchZvuka(tekst)) || null
+  }
+
+  function ostanovitZvuk() {
+    try {
+      if (igraet) igraet.pause()
+    } catch {}
+    igraet = null
+    if (podryad) podryad.stop = true
+    podryad = null
+  }
+
+  function igrat(tekst) {
+    const fayl = faylZvuka(tekst)
+    if (!fayl) {
+      toast('Для этого слова озвучки нет', 'warn')
+      return
+    }
+    try {
+      ostanovitZvuk()
+      igraet = new Audio(fayl)
+      const start = igraet.play()
+      if (start && start.catch) {
+        start.catch(() => toast('Звук не включился: проверьте громкость телефона и разрешение на звук', 'warn'))
+      }
+    } catch {
+      toast('В этом браузере звук недоступен', 'warn')
+    }
+  }
+
+  // Проиграть список слов подряд — упражнение «слушать и повторять вслух».
+  function igratPodryad(teksty, knopka) {
+    if (podryad) {
+      ostanovitZvuk()
+      if (knopka) knopka.textContent = '▶️ Прослушать все слова подряд'
+      return
+    }
+    const faily = teksty.map(faylZvuka).filter(Boolean)
+    if (!faily.length) {
+      toast('Озвучка ещё не загрузилась', 'warn')
+      return
+    }
+    const sostoyanie = { fayly: faily, nomer: 0, stop: false }
+    podryad = sostoyanie
+    const sleduyushchee = () => {
+      if (sostoyanie.stop) return
+      if (sostoyanie.nomer >= faily.length) {
+        podryad = null
+        if (knopka) knopka.textContent = '▶️ Прослушать все слова подряд'
+        toast('Прослушали все слова', 'ok')
+        return
+      }
+      sostoyanie.nomer += 1
+      if (knopka) knopka.textContent = `⏸ Слушаем ${sostoyanie.nomer} из ${faily.length} — нажмите, чтобы остановить`
+      try {
+        igraet = new Audio(faily[sostoyanie.nomer - 1])
+        igraet.onended = sleduyushchee
+        const start = igraet.play()
+        if (start && start.catch) start.catch(() => { sostoyanie.stop = true })
+      } catch {
+        sostoyanie.stop = true
+      }
+    }
+    sleduyushchee()
+  }
+
+  // Кнопка «послушать»; если озвучки для слова нет — возвращает null.
+  function knopkaZvuka(tekst, opts) {
+    const nastroyki = opts || {}
+    if (!faylZvuka(tekst)) return null
+    return h('button', {
+      class: nastroyki.class || 'btn small',
+      text: nastroyki.text || '🔊 Послушать',
+      title: tekst,
+      onclick: (e) => {
+        e.stopPropagation()
+        igrat(tekst)
+        buzz(20)
+      },
+    })
   }
 
   function toast(text, kind) {
@@ -735,6 +849,38 @@
         return h('span', { class: 'chip plain', text: `${deck} · ${learned}/${total}` })
       })),
       h('p', { class: 'muted small', text: 'Карточки с пометкой «проверить у носителя» показывают плашку на обороте.' }),
+
+      // --- слушание: то самое упражнение «слушать и повторять вслух»
+      h('h2', { text: 'Слушать слова' }),
+      h('p', { class: 'muted small', text: zvuki
+        ? 'Нажмите на слово — услышите произношение. Слушайте и повторяйте вслух: это и есть работа на слух.'
+        : zvukiNet
+          ? 'Озвучка не загрузилась. Проверьте интернет и обновите страницу — файлы лежат рядом с приложением в папке audio.'
+          : 'Озвучка загружается…' }),
+      zvuki
+        ? h('button', {
+            class: 'btn ghost wide',
+            text: '▶️ Прослушать все слова подряд',
+            onclick: (e) => igratPodryad(DATA.cards.map((c) => c.front), e.currentTarget),
+          })
+        : null,
+      zvuki
+        ? h('div', {}, decks.map((deck) =>
+            h('details', { class: 'acc' }, [
+              h('summary', { text: `${deck} · ${DATA.cards.filter((c) => c.deck === deck).length} слов` }),
+              h('ul', { class: 'list-plain' }, DATA.cards.filter((c) => c.deck === deck).map((c) =>
+                h('li', {}, [
+                  h('button', {
+                    class: 'linklike',
+                    text: `🔊 ${c.front}`,
+                    onclick: (e) => { e.preventDefault(); igrat(c.front) },
+                  }),
+                  h('span', { class: 'muted small', text: ` — ${c.back}` }),
+                ]),
+              )),
+            ]),
+          ))
+        : null,
     ])
   }
 
@@ -756,6 +902,11 @@
     }, [
       h('div', { class: 'deck small muted', text: card.deck }),
       h('div', { class: 'word', text: front }),
+      // Осетинскую сторону слушаем всегда; в направлении «рус → осет» кнопка
+      // появляется только после переворота, иначе она подсказывала бы ответ.
+      dir === 'os-ru' || cardSession.flipped
+        ? knopkaZvuka(card.front, { class: 'btn ghost small', text: '🔊 Послушать слово' })
+        : null,
       cardSession.flipped
         ? h('div', { class: 'answer' }, [
             h('div', { class: 'word2', text: back }),
@@ -1040,6 +1191,7 @@
 
   function boot() {
     buildTabs()
+    zagruzitZvuki()
     if (tg) {
       try {
         tg.ready()

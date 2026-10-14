@@ -177,6 +177,25 @@
     return problems
   }
 
+  /**
+   * Чистка текста для озвучки: знаки препинания в звук не попадают, поэтому
+   * файл ищется по очищенному тексту. Одна и та же функция используется
+   * приложением, инструментом озвучки (ozvuchka\sobrat-slova.cjs) и тестами —
+   * иначе текст карточки и текст в списке озвучки перестанут совпадать.
+   */
+  function ochistitTekst(tekst) {
+    return String(tekst || '')
+      .replace(/[·•]/g, ' – ')
+      .replace(/[^А-Яа-яӕӔÆæЁё\-– ]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  }
+
+  /** Ключ для поиска озвучки: тот же текст, но без учёта регистра. */
+  function klyuchZvuka(tekst) {
+    return ochistitTekst(tekst).toLowerCase()
+  }
+
   const api = {
     INTERVALS_DAYS,
     AGAIN_MS,
@@ -193,6 +212,8 @@
     totals,
     pickQueue,
     validateData,
+    ochistitTekst,
+    klyuchZvuka,
   }
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api

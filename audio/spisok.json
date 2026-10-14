@@ -1,0 +1,835 @@
+{
+  "model": "facebook/mms-tts-oss",
+  "licenziya": "CC-BY-NC 4.0 (AI at Meta, MMS)",
+  "sdelano": "2026-10-14 18:52",
+  "faily": [
+    {
+      "tekst": "Салам",
+      "fayl": "001-salam.mp3",
+      "sekund": 0.97,
+      "kb": 6.3
+    },
+    {
+      "tekst": "Дæ бон хорз",
+      "fayl": "002-dae-bon-horz.mp3",
+      "sekund": 0.97,
+      "kb": 6.3
+    },
+    {
+      "tekst": "Уæ бон хорз",
+      "fayl": "003-uae-bon-horz.mp3",
+      "sekund": 1.04,
+      "kb": 6.6
+    },
+    {
+      "tekst": "Æгас цу",
+      "fayl": "004-aegas-cu.mp3",
+      "sekund": 0.91,
+      "kb": 5.9
+    },
+    {
+      "tekst": "Æгас цæут",
+      "fayl": "005-aegas-caeut.mp3",
+      "sekund": 0.93,
+      "kb": 6.0
+    },
+    {
+      "tekst": "Куыд у",
+      "fayl": "006-kuyd-u.mp3",
+      "sekund": 0.71,
+      "kb": 4.8
+    },
+    {
+      "tekst": "Куыд ут",
+      "fayl": "007-kuyd-ut.mp3",
+      "sekund": 0.78,
+      "kb": 5.1
+    },
+    {
+      "tekst": "Хорз",
+      "fayl": "008-horz.mp3",
+      "sekund": 0.64,
+      "kb": 4.4
+    },
+    {
+      "tekst": "Тынг хорз",
+      "fayl": "009-tyng-horz.mp3",
+      "sekund": 0.87,
+      "kb": 5.7
+    },
+    {
+      "tekst": "Дæ хорзæхæй",
+      "fayl": "010-dae-horzaehaey.mp3",
+      "sekund": 1.05,
+      "kb": 6.8
+    },
+    {
+      "tekst": "Уæ хорзæхæй",
+      "fayl": "011-uae-horzaehaey.mp3",
+      "sekund": 1.05,
+      "kb": 6.8
+    },
+    {
+      "tekst": "Бузныг",
+      "fayl": "012-buznyg.mp3",
+      "sekund": 0.78,
+      "kb": 5.1
+    },
+    {
+      "tekst": "Тынг бузныг",
+      "fayl": "013-tyng-buznyg.mp3",
+      "sekund": 0.88,
+      "kb": 5.7
+    },
+    {
+      "tekst": "Бахатыр кæн",
+      "fayl": "014-bahatyr-kaen.mp3",
+      "sekund": 1.0,
+      "kb": 6.5
+    },
+    {
+      "tekst": "Бахатыр кæнут",
+      "fayl": "015-bahatyr-kaenut.mp3",
+      "sekund": 1.04,
+      "kb": 6.6
+    },
+    {
+      "tekst": "Хæрзбон",
+      "fayl": "016-haerzbon.mp3",
+      "sekund": 0.86,
+      "kb": 5.7
+    },
+    {
+      "tekst": "Фенамæ",
+      "fayl": "017-fenamae.mp3",
+      "sekund": 1.1,
+      "kb": 7.1
+    },
+    {
+      "tekst": "Нæ",
+      "fayl": "018-nae.mp3",
+      "sekund": 0.7,
+      "kb": 4.7
+    },
+    {
+      "tekst": "Ма",
+      "fayl": "019-ma.mp3",
+      "sekund": 0.83,
+      "kb": 5.4
+    },
+    {
+      "tekst": "æз",
+      "fayl": "020-aez.mp3",
+      "sekund": 0.69,
+      "kb": 4.7
+    },
+    {
+      "tekst": "ды",
+      "fayl": "021-dy.mp3",
+      "sekund": 0.82,
+      "kb": 5.4
+    },
+    {
+      "tekst": "уый",
+      "fayl": "022-uyy.mp3",
+      "sekund": 0.76,
+      "kb": 5.1
+    },
+    {
+      "tekst": "мах",
+      "fayl": "023-mah.mp3",
+      "sekund": 0.9,
+      "kb": 5.9
+    },
+    {
+      "tekst": "сымах",
+      "fayl": "024-symah.mp3",
+      "sekund": 1.04,
+      "kb": 6.6
+    },
+    {
+      "tekst": "уыдон",
+      "fayl": "025-uydon.mp3",
+      "sekund": 0.72,
+      "kb": 4.8
+    },
+    {
+      "tekst": "мæ",
+      "fayl": "026-mae.mp3",
+      "sekund": 0.67,
+      "kb": 4.5
+    },
+    {
+      "tekst": "дæ",
+      "fayl": "027-dae.mp3",
+      "sekund": 0.67,
+      "kb": 4.5
+    },
+    {
+      "tekst": "йæ",
+      "fayl": "028-yae.mp3",
+      "sekund": 0.62,
+      "kb": 4.2
+    },
+    {
+      "tekst": "уæ",
+      "fayl": "029-uae.mp3",
+      "sekund": 0.71,
+      "kb": 4.8
+    },
+    {
+      "tekst": "сæ",
+      "fayl": "030-sae.mp3",
+      "sekund": 0.51,
+      "kb": 3.6
+    },
+    {
+      "tekst": "дæн – дæ – у – стæм – стут – сты",
+      "fayl": "031-daen-dae-u-staem-stut-sty.mp3",
+      "sekund": 2.17,
+      "kb": 13.4
+    },
+    {
+      "tekst": "Æз студент дæн",
+      "fayl": "032-aez-student-daen.mp3",
+      "sekund": 1.24,
+      "kb": 7.9
+    },
+    {
+      "tekst": "ай уый",
+      "fayl": "033-ay-uyy.mp3",
+      "sekund": 0.86,
+      "kb": 5.6
+    },
+    {
+      "tekst": "Æз ирон æвзаг ахуыр кæнын",
+      "fayl": "034-aez-iron-aevzag-ahuyr-kaenyn.mp3",
+      "sekund": 2.05,
+      "kb": 12.6
+    },
+    {
+      "tekst": "Чи у",
+      "fayl": "035-chi-u.mp3",
+      "sekund": 0.74,
+      "kb": 5.0
+    },
+    {
+      "tekst": "Цы у",
+      "fayl": "036-cy-u.mp3",
+      "sekund": 0.8,
+      "kb": 5.3
+    },
+    {
+      "tekst": "Дæ ном цы у",
+      "fayl": "037-dae-nom-cy-u.mp3",
+      "sekund": 0.93,
+      "kb": 6.0
+    },
+    {
+      "tekst": "Куыд дæ хонынц",
+      "fayl": "038-kuyd-dae-honync.mp3",
+      "sekund": 0.99,
+      "kb": 6.3
+    },
+    {
+      "tekst": "кæнын",
+      "fayl": "039-kaenyn.mp3",
+      "sekund": 0.65,
+      "kb": 4.4
+    },
+    {
+      "tekst": "цæуын",
+      "fayl": "040-caeuyn.mp3",
+      "sekund": 0.83,
+      "kb": 5.4
+    },
+    {
+      "tekst": "дзурын",
+      "fayl": "041-dzuryn.mp3",
+      "sekund": 0.9,
+      "kb": 5.9
+    },
+    {
+      "tekst": "зонын",
+      "fayl": "042-zonyn.mp3",
+      "sekund": 0.76,
+      "kb": 5.0
+    },
+    {
+      "tekst": "фыссын",
+      "fayl": "043-fyssyn.mp3",
+      "sekund": 0.74,
+      "kb": 5.0
+    },
+    {
+      "tekst": "кæсын",
+      "fayl": "044-kaesyn.mp3",
+      "sekund": 0.69,
+      "kb": 4.7
+    },
+    {
+      "tekst": "хæрын",
+      "fayl": "045-haeryn.mp3",
+      "sekund": 0.69,
+      "kb": 4.7
+    },
+    {
+      "tekst": "нуазын",
+      "fayl": "046-nuazyn.mp3",
+      "sekund": 0.84,
+      "kb": 5.6
+    },
+    {
+      "tekst": "хуыссын",
+      "fayl": "047-huyssyn.mp3",
+      "sekund": 1.08,
+      "kb": 7.0
+    },
+    {
+      "tekst": "уарзын",
+      "fayl": "048-uarzyn.mp3",
+      "sekund": 0.9,
+      "kb": 5.9
+    },
+    {
+      "tekst": "æмбарын",
+      "fayl": "049-aembaryn.mp3",
+      "sekund": 0.91,
+      "kb": 5.9
+    },
+    {
+      "tekst": "ахуыр кæнын",
+      "fayl": "050-ahuyr-kaenyn.mp3",
+      "sekund": 0.85,
+      "kb": 5.6
+    },
+    {
+      "tekst": "кæнын – кæныс – кæны – кæнæм – кæнут – кæнынц",
+      "fayl": "051-kaenyn-kaenys-kaeny-kaenaem-.mp3",
+      "sekund": 3.01,
+      "kb": 18.3
+    },
+    {
+      "tekst": "окончания -ын – -ыс – -ы – -æм – -ут – -ынц",
+      "fayl": "052-okonchaniya-yn-ys-y-aem-ut-y.mp3",
+      "sekund": 3.41,
+      "kb": 20.6
+    },
+    {
+      "tekst": "нæ ма",
+      "fayl": "053-nae-ma.mp3",
+      "sekund": 0.83,
+      "kb": 5.4
+    },
+    {
+      "tekst": "кæн кæнут",
+      "fayl": "054-kaen-kaenut.mp3",
+      "sekund": 0.74,
+      "kb": 5.0
+    },
+    {
+      "tekst": "цæу дзур",
+      "fayl": "055-caeu-dzur.mp3",
+      "sekund": 0.99,
+      "kb": 6.3
+    },
+    {
+      "tekst": "Цы кæныс",
+      "fayl": "056-cy-kaenys.mp3",
+      "sekund": 0.78,
+      "kb": 5.1
+    },
+    {
+      "tekst": "Кæм цæуыс",
+      "fayl": "057-kaem-caeuys.mp3",
+      "sekund": 1.01,
+      "kb": 6.5
+    },
+    {
+      "tekst": "Цы ахуыр кæныс",
+      "fayl": "058-cy-ahuyr-kaenys.mp3",
+      "sekund": 1.13,
+      "kb": 7.3
+    },
+    {
+      "tekst": "иу",
+      "fayl": "059-iu.mp3",
+      "sekund": 0.93,
+      "kb": 6.0
+    },
+    {
+      "tekst": "дыууæ",
+      "fayl": "060-dyuuae.mp3",
+      "sekund": 0.91,
+      "kb": 5.9
+    },
+    {
+      "tekst": "æртæ",
+      "fayl": "061-aertae.mp3",
+      "sekund": 0.68,
+      "kb": 4.7
+    },
+    {
+      "tekst": "цыппар",
+      "fayl": "062-cyppar.mp3",
+      "sekund": 0.98,
+      "kb": 6.3
+    },
+    {
+      "tekst": "фондз",
+      "fayl": "063-fondz.mp3",
+      "sekund": 0.78,
+      "kb": 5.1
+    },
+    {
+      "tekst": "æхсæз",
+      "fayl": "064-aehsaez.mp3",
+      "sekund": 0.96,
+      "kb": 6.2
+    },
+    {
+      "tekst": "авд",
+      "fayl": "065-avd.mp3",
+      "sekund": 0.57,
+      "kb": 3.9
+    },
+    {
+      "tekst": "аст",
+      "fayl": "066-ast.mp3",
+      "sekund": 0.63,
+      "kb": 4.2
+    },
+    {
+      "tekst": "фараст",
+      "fayl": "067-farast.mp3",
+      "sekund": 0.89,
+      "kb": 5.9
+    },
+    {
+      "tekst": "дæс",
+      "fayl": "068-daes.mp3",
+      "sekund": 0.81,
+      "kb": 5.3
+    },
+    {
+      "tekst": "иуæндæс",
+      "fayl": "069-iuaendaes.mp3",
+      "sekund": 0.93,
+      "kb": 6.0
+    },
+    {
+      "tekst": "дыууадæс",
+      "fayl": "070-dyuuadaes.mp3",
+      "sekund": 0.97,
+      "kb": 6.3
+    },
+    {
+      "tekst": "æртындæс",
+      "fayl": "071-aertyndaes.mp3",
+      "sekund": 0.97,
+      "kb": 6.3
+    },
+    {
+      "tekst": "цыппæрдæс",
+      "fayl": "072-cyppaerdaes.mp3",
+      "sekund": 1.08,
+      "kb": 7.0
+    },
+    {
+      "tekst": "фынддæс",
+      "fayl": "073-fynddaes.mp3",
+      "sekund": 0.87,
+      "kb": 5.7
+    },
+    {
+      "tekst": "æхсæрдæс",
+      "fayl": "074-aehsaerdaes.mp3",
+      "sekund": 1.25,
+      "kb": 7.9
+    },
+    {
+      "tekst": "æвддæс",
+      "fayl": "075-aevddaes.mp3",
+      "sekund": 0.96,
+      "kb": 6.2
+    },
+    {
+      "tekst": "æстдæс",
+      "fayl": "076-aestdaes.mp3",
+      "sekund": 1.0,
+      "kb": 6.5
+    },
+    {
+      "tekst": "нудæс",
+      "fayl": "077-nudaes.mp3",
+      "sekund": 0.99,
+      "kb": 6.3
+    },
+    {
+      "tekst": "ссæдз",
+      "fayl": "078-ssaedz.mp3",
+      "sekund": 0.98,
+      "kb": 6.3
+    },
+    {
+      "tekst": "æртын",
+      "fayl": "079-aertyn.mp3",
+      "sekund": 0.95,
+      "kb": 6.2
+    },
+    {
+      "tekst": "дыууиссæдз",
+      "fayl": "080-dyuuissaedz.mp3",
+      "sekund": 1.13,
+      "kb": 7.3
+    },
+    {
+      "tekst": "фæндзай",
+      "fayl": "081-faendzay.mp3",
+      "sekund": 0.77,
+      "kb": 5.1
+    },
+    {
+      "tekst": "æхсай",
+      "fayl": "082-aehsay.mp3",
+      "sekund": 0.77,
+      "kb": 5.1
+    },
+    {
+      "tekst": "æвдай",
+      "fayl": "083-aevday.mp3",
+      "sekund": 0.82,
+      "kb": 5.4
+    },
+    {
+      "tekst": "æстай",
+      "fayl": "084-aestay.mp3",
+      "sekund": 0.75,
+      "kb": 5.0
+    },
+    {
+      "tekst": "нæуæдз",
+      "fayl": "085-naeuaedz.mp3",
+      "sekund": 0.89,
+      "kb": 5.7
+    },
+    {
+      "tekst": "сæдæ мин",
+      "fayl": "086-saedae-min.mp3",
+      "sekund": 0.91,
+      "kb": 5.9
+    },
+    {
+      "tekst": "иу æмæ ссæдз",
+      "fayl": "087-iu-aemae-ssaedz.mp3",
+      "sekund": 1.07,
+      "kb": 6.8
+    },
+    {
+      "tekst": "дыууæ мæ ссæдз",
+      "fayl": "088-dyuuae-mae-ssaedz.mp3",
+      "sekund": 1.16,
+      "kb": 7.4
+    },
+    {
+      "tekst": "Цас у",
+      "fayl": "089-cas-u.mp3",
+      "sekund": 0.81,
+      "kb": 5.3
+    },
+    {
+      "tekst": "Мæн ис азы",
+      "fayl": "090-maen-is-azy.mp3",
+      "sekund": 1.25,
+      "kb": 7.9
+    },
+    {
+      "tekst": "-ы -йы",
+      "fayl": "091-y-yy.mp3",
+      "sekund": 0.58,
+      "kb": 4.0
+    },
+    {
+      "tekst": "-æн",
+      "fayl": "092-aen.mp3",
+      "sekund": 0.59,
+      "kb": 4.0
+    },
+    {
+      "tekst": "-ыл",
+      "fayl": "093-yl.mp3",
+      "sekund": 1.0,
+      "kb": 6.5
+    },
+    {
+      "tekst": "-мæ",
+      "fayl": "094-mae.mp3",
+      "sekund": 0.79,
+      "kb": 5.3
+    },
+    {
+      "tekst": "-æй",
+      "fayl": "095-aey.mp3",
+      "sekund": 0.6,
+      "kb": 4.0
+    },
+    {
+      "tekst": "Мæн ис хæдзар",
+      "fayl": "096-maen-is-haedzar.mp3",
+      "sekund": 1.39,
+      "kb": 8.8
+    },
+    {
+      "tekst": "Мæн нæй",
+      "fayl": "097-maen-naey.mp3",
+      "sekund": 0.74,
+      "kb": 5.0
+    },
+    {
+      "tekst": "Предлоги æд – æнæ – фæйнæ",
+      "fayl": "098-predlogi-aed-aenae-faeynae.mp3",
+      "sekund": 2.07,
+      "kb": 12.8
+    },
+    {
+      "tekst": "сæр – бын – фарсмæ",
+      "fayl": "099-saer-byn-farsmae.mp3",
+      "sekund": 2.01,
+      "kb": 12.3
+    },
+    {
+      "tekst": "фæстæ – раз – мидæг – æдде",
+      "fayl": "100-faestae-raz-midaeg-aedde.mp3",
+      "sekund": 2.99,
+      "kb": 18.1
+    },
+    {
+      "tekst": "чи",
+      "fayl": "101-chi.mp3",
+      "sekund": 0.51,
+      "kb": 3.6
+    },
+    {
+      "tekst": "цы",
+      "fayl": "102-cy.mp3",
+      "sekund": 0.66,
+      "kb": 4.5
+    },
+    {
+      "tekst": "кæм",
+      "fayl": "103-kaem.mp3",
+      "sekund": 0.58,
+      "kb": 4.0
+    },
+    {
+      "tekst": "кæдæм",
+      "fayl": "104-kaedaem.mp3",
+      "sekund": 0.71,
+      "kb": 4.8
+    },
+    {
+      "tekst": "кæцæй",
+      "fayl": "105-kaecaey.mp3",
+      "sekund": 0.96,
+      "kb": 6.2
+    },
+    {
+      "tekst": "куыд",
+      "fayl": "106-kuyd.mp3",
+      "sekund": 0.74,
+      "kb": 5.0
+    },
+    {
+      "tekst": "цас",
+      "fayl": "107-cas.mp3",
+      "sekund": 0.63,
+      "kb": 4.4
+    },
+    {
+      "tekst": "цæмæн",
+      "fayl": "108-caemaen.mp3",
+      "sekund": 0.66,
+      "kb": 4.5
+    },
+    {
+      "tekst": "кæд",
+      "fayl": "109-kaed.mp3",
+      "sekund": 0.73,
+      "kb": 5.0
+    },
+    {
+      "tekst": "цавæр",
+      "fayl": "110-cavaer.mp3",
+      "sekund": 1.05,
+      "kb": 6.8
+    },
+    {
+      "tekst": "Мæн хъæуы",
+      "fayl": "111-maen-qaeuy.mp3",
+      "sekund": 0.83,
+      "kb": 5.4
+    },
+    {
+      "tekst": "Нæ хъæуы",
+      "fayl": "112-nae-qaeuy.mp3",
+      "sekund": 0.7,
+      "kb": 4.7
+    },
+    {
+      "tekst": "Мынау",
+      "fayl": "113-mynau.mp3",
+      "sekund": 0.67,
+      "kb": 4.5
+    },
+    {
+      "tekst": "дон æхсыр",
+      "fayl": "114-don-aehsyr.mp3",
+      "sekund": 0.97,
+      "kb": 6.2
+    },
+    {
+      "tekst": "бон – райсом – изæр – æхсæв",
+      "fayl": "115-bon-raysom-izaer-aehsaev.mp3",
+      "sekund": 2.06,
+      "kb": 12.6
+    },
+    {
+      "tekst": "къуыри – мæй – аз",
+      "fayl": "116-kuyri-maey-az.mp3",
+      "sekund": 1.51,
+      "kb": 9.4
+    },
+    {
+      "tekst": "хæдзар – горæт – хъæу",
+      "fayl": "117-haedzar-goraet-qaeu.mp3",
+      "sekund": 1.62,
+      "kb": 10.0
+    },
+    {
+      "tekst": "уынг – фæндаг – дуар – къуым",
+      "fayl": "118-uyng-faendag-duar-kuym.mp3",
+      "sekund": 2.07,
+      "kb": 12.8
+    },
+    {
+      "tekst": "уыд – цыд – кодта – загъта – федта",
+      "fayl": "119-uyd-cyd-kodta-zaghta-fedta.mp3",
+      "sekund": 2.78,
+      "kb": 16.9
+    },
+    {
+      "tekst": "знон – абон – райсом",
+      "fayl": "120-znon-abon-raysom.mp3",
+      "sekund": 2.59,
+      "kb": 15.8
+    },
+    {
+      "tekst": "раздæр – фæстæ",
+      "fayl": "121-razdaer-faestae.mp3",
+      "sekund": 1.57,
+      "kb": 9.9
+    },
+    {
+      "tekst": "Мæ фæнды",
+      "fayl": "122-mae-faendy.mp3",
+      "sekund": 0.88,
+      "kb": 5.7
+    },
+    {
+      "tekst": "Дæ фæнды",
+      "fayl": "123-dae-faendy.mp3",
+      "sekund": 0.9,
+      "kb": 5.9
+    },
+    {
+      "tekst": "Хъæуы",
+      "fayl": "124-qaeuy.mp3",
+      "sekund": 0.84,
+      "kb": 5.6
+    },
+    {
+      "tekst": "Хорз фенамæ",
+      "fayl": "125-horz-fenamae.mp3",
+      "sekund": 1.22,
+      "kb": 7.7
+    },
+    {
+      "tekst": "мад – фыд",
+      "fayl": "126-mad-fyd.mp3",
+      "sekund": 0.78,
+      "kb": 5.1
+    },
+    {
+      "tekst": "æфсымæр – хо",
+      "fayl": "127-aefsymaer-ho.mp3",
+      "sekund": 1.32,
+      "kb": 8.3
+    },
+    {
+      "tekst": "фырт – чызг",
+      "fayl": "128-fyrt-chyzg.mp3",
+      "sekund": 1.12,
+      "kb": 7.1
+    },
+    {
+      "tekst": "бинонтæ – хистæр – кæстæр",
+      "fayl": "129-binontae-histaer-kaestaer.mp3",
+      "sekund": 2.71,
+      "kb": 16.4
+    },
+    {
+      "tekst": "хорз – æвзæр",
+      "fayl": "130-horz-aevzaer.mp3",
+      "sekund": 1.29,
+      "kb": 8.2
+    },
+    {
+      "tekst": "стыр – гыццыл – тынг",
+      "fayl": "131-styr-gyccyl-tyng.mp3",
+      "sekund": 1.41,
+      "kb": 8.9
+    },
+    {
+      "tekst": "æмæ – фæлæ – уый тыххæй",
+      "fayl": "132-aemae-faelae-uyy-tyhhaey.mp3",
+      "sekund": 1.42,
+      "kb": 8.9
+    },
+    {
+      "tekst": "дæр – æрмæст",
+      "fayl": "133-daer-aermaest.mp3",
+      "sekund": 1.04,
+      "kb": 6.6
+    },
+    {
+      "tekst": "Æз нæ æмбарын",
+      "fayl": "134-aez-nae-aembaryn.mp3",
+      "sekund": 1.02,
+      "kb": 6.6
+    },
+    {
+      "tekst": "Бахатыр кæн нæ æмбарын",
+      "fayl": "135-bahatyr-kaen-nae-aembaryn.mp3",
+      "sekund": 1.58,
+      "kb": 9.9
+    },
+    {
+      "tekst": "Ацы дзырд иронау куыд у",
+      "fayl": "136-acy-dzyrd-ironau-kuyd-u.mp3",
+      "sekund": 1.75,
+      "kb": 10.8
+    },
+    {
+      "tekst": "Иу хатт ма зæгъ",
+      "fayl": "137-iu-hatt-ma-zaegh.mp3",
+      "sekund": 1.68,
+      "kb": 10.5
+    },
+    {
+      "tekst": "Тæссаг",
+      "fayl": "138-taessag.mp3",
+      "sekund": 0.76,
+      "kb": 5.0
+    }
+  ]
+}
